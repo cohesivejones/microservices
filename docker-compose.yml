@@ -1,0 +1,44 @@
+version: "3.4"
+services:
+    servicea:
+      build:
+        context: servicea/.
+      expose:
+        - 4000
+      networks:
+        - microservices
+    serviceb:
+      build:
+        context: serviceb/.
+      expose:
+        - 4000
+      networks:
+        - microservices
+    servicec:
+      build:
+        context: servicec/.
+      environment:
+        USER_SERVICE: http://reverse_proxy
+        PRODUCT_SERVICE: http://reverse_proxy
+      expose:
+        - 4000
+      networks:
+        - microservices
+    monolith:
+      build:
+        context: monolith/.
+      expose:
+        - 4000
+      networks:
+        - microservices
+    reverse_proxy:
+      image: nginx:latest
+      volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf
+      ports:
+        - 80:80
+      networks:
+        - microservices
+networks:
+  microservices:
+    driver: bridge
