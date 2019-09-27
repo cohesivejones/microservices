@@ -1,6 +1,6 @@
 # Microservices
 ## Purpose
-Illustrate the use of the strangler pattern in moving behaviour from a monolith to a microservice architecture
+Demonstrate the use of the strangler pattern in moving behaviour from a monolith to a microservice architecture
 
 ## Setup instructions
 1. Install docker
@@ -10,7 +10,9 @@ Illustrate the use of the strangler pattern in moving behaviour from a monolith 
 Navigate to http://localhost/{users/products/catalog}
 
 ## Modifying reverse proxy
-Modify nginx.conf to stangle monolith services and redirect traffic to individual microservices
+Modify nginx.conf to stangle monolith services and redirect traffic to individual microservices. After modifying
+nginx.conf simply run `docker-compose restart reverse_proxy` to reload applied changes to the reverse proxy.
+
 ```
 http {
   server {
